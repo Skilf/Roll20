@@ -26,17 +26,22 @@ linkbars.process = function(msg){
                 
     if (!obj) { return; }
     _.each(obj, function(selected) {    
-        
-        var token = getObj('graphic', selected._id);
-        var id = token.get('represents');
-        var char = getObj("character",id);
-        // set Token name to Character name
-        token.set("name", char.get("name"));
-        // link/set bar value
-        linkbars.link(token, id, "bar1");
-        linkbars.link(token, id, "bar2");
-        linkbars.link(token, id, "bar3");
+        linkbars.run(selected._id);
+       
     });
+}
+
+linkbars.run=function(selected){
+    var token = getObj('graphic', selected);
+    var id = token.get('represents');
+    var char = getObj("character",id);
+    // set Token name to Character name
+    token.set("name", char.get("name"));
+    // link/set bar value
+    linkbars.link(token, id, "bar1");
+    linkbars.link(token, id, "bar2");
+    linkbars.link(token, id, "bar3");
+    
 }
 
 linkbars.link=function(token, id, bar){
